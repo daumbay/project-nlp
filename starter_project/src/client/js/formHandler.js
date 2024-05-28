@@ -1,5 +1,5 @@
 // Replace checkForName with a function that checks the URL
-import { checkForName } from './nameChecker'
+import { isValidUrl } from './nameChecker'
 
 // If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
 // const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
@@ -22,25 +22,26 @@ function handleSubmit(event) {
     // Check if the URL is valid
     if (isValidUrl(formText)) {
         url = formText;
-    } else {
-        console.log('Invalid URL');
-    }
-    // If the URL is valid, send it to the server using the serverURL constant above        
-    getData().then(res => {
-        const formdata = new FormData();
-        formdata.append("key", res);
-        formdata.append("url", url);
-        formdata.append("lang", "en");  // 2-letter code, like en es fr ...
 
-        const requestOptions = {
-        method: 'POST',
-        body: formdata,
-        redirect: 'follow'
-        };
-        callAPI(requestOptions).then(res => {
-            updateView(res);
-        });
-    });
+        // If the URL is valid, send it to the server using the serverURL constant above        
+        getData().then(res => {
+            const formdata = new FormData();
+            formdata.append("key", res);
+            formdata.append("url", url);
+            formdata.append("lang", "en");  // 2-letter code, like en es fr ...
+
+            const requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow'
+            };
+            callAPI(requestOptions).then(res => {
+                updateView(res);
+            }).catch(error => console.log(error));
+        }).catch(error => console.log(error));
+    } else {
+        alert('Invalid URL');
+    }
 }
 
 // Function to update UI with sentiment analysis
