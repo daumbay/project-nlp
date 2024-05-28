@@ -37,8 +37,19 @@ function handleSubmit(event) {
         body: formdata,
         redirect: 'follow'
         };
-        callAPI(requestOptions).then(res => console.log(res));
+        callAPI(requestOptions).then(res => {
+            console.log(res);
+            updateView(res);
+        });
     });
+}
+
+// Function to update UI with sentiment analysis
+function updateView(obj) {
+    
+    const div = document.getElementById('results');
+    const p = document.createElement('p');
+    div.appendChild(p).innerHTML = obj.subjectivity;
 }
 
 // Function to gather data from API call
