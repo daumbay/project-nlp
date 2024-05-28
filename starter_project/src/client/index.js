@@ -1,13 +1,14 @@
 // js files
 import { handleSubmit } from './js/formHandler'
 import { checkForName } from './js/nameChecker'
-
+import { getData } from './js/formHandler'
 export {
     handleSubmit,
-    checkForName
+    checkForName,
+    getData
 }
 
-alert("I EXIST")
+// alert("I EXIST")
 // console.log("CHANGE!!");
 
 // sass files

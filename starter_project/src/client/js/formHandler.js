@@ -16,7 +16,7 @@ function handleSubmit(event) {
 
     // This is an example code that checks the submitted name. You may remove it from your code
     checkForName(formText);
-    
+    getData();
     // Check if the URL is valid
  
         // If the URL is valid, send it to the server using the serverURL constant above
@@ -24,7 +24,18 @@ function handleSubmit(event) {
 }
 
 // Function to send data to the server
+async function getData () {
+    const response = await fetch('/key');
+    
+    try {
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 // Export the handleSubmit function
 export { handleSubmit };
+export { getData };
 

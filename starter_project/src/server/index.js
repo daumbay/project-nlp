@@ -14,12 +14,15 @@ app.use(express.static('dist'))
 console.log(__dirname);
 
 // Variables for url and api key
-
+const apiKey = process.env.API_KEY;
 
 app.get('/', function (req, res) {
     res.send('dist/index.html');
 });
 
+app.get('/key', function (req, res) {
+    res.send({apiKey});
+});
 
 // POST Route
 
