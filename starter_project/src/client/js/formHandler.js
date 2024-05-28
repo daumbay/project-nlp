@@ -16,16 +16,41 @@ function handleSubmit(event) {
 
     // This is an example code that checks the submitted name. You may remove it from your code
     checkForName(formText);
-    const apiKey = getData();
+    
+    let url = '';
+    let requestOptions = {};
     // Check if the URL is valid
     if (isValidUrl(formText)) {
-        const url = formText;
-        console.log(apiKey, url);
+        url = formText;
     } else {
         console.log('Invalid URL');
     }
-        // If the URL is valid, send it to the server using the serverURL constant above
-      
+    // If the URL is valid, send it to the server using the serverURL constant above        
+    getData().then(res => {
+        const formdata = new FormData();
+        formdata.append("key", res);
+        formdata.append("url", url);
+        formdata.append("lang", "en");  // 2-letter code, like en es fr ...
+
+        const requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+        };
+        callAPI(requestOptions).then(res => console.log(res));
+    });
+}
+
+// Function to gather data from API call
+async function callAPI (options) {
+    const response = await fetch('https://api.meaningcloud.com/sentiment-2.1', options);
+
+    try {
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 // Function to check validity of URL
@@ -52,5 +77,6 @@ async function getData () {
 
 // Export the handleSubmit function
 export { handleSubmit };
+export { callAPI };
 export { getData };
 export { isValidUrl };
