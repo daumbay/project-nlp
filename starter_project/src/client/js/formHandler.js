@@ -15,7 +15,7 @@ function handleSubmit(event) {
     const formText = document.getElementById('name').value;
 
     // This is an example code that checks the submitted name. You may remove it from your code
-    checkForName(formText);
+    // checkForName(formText);
     
     let url = '';
     let requestOptions = {};
@@ -38,7 +38,6 @@ function handleSubmit(event) {
         redirect: 'follow'
         };
         callAPI(requestOptions).then(res => {
-            console.log(res);
             updateView(res);
         });
     });
@@ -46,10 +45,13 @@ function handleSubmit(event) {
 
 // Function to update UI with sentiment analysis
 function updateView(obj) {
-    
     const div = document.getElementById('results');
-    const p = document.createElement('p');
-    div.appendChild(p).innerHTML = obj.subjectivity;
+    const p1 = document.createElement('p');
+    const p2 = document.createElement('p');
+    const p3 = document.createElement('p');
+    div.appendChild(p1).innerHTML = `The sentiments detected in the text are in ${obj.agreement}.`;
+    div.appendChild(p2).innerHTML = `The text is ${obj.subjectivity}.`;
+    div.appendChild(p3).innerHTML = obj.sentence_list[0].text;
 }
 
 // Function to gather data from API call
@@ -61,16 +63,6 @@ async function callAPI (options) {
         return data;
     } catch (error) {
         console.log(error);
-    }
-}
-
-// Function to check validity of URL
-function isValidUrl (text) {
-    try {
-        const url = new URL(text);
-        return (url.protocol === 'http:' || url.protocol === 'https:')
-    } catch (error) {
-        return false;
     }
 }
 
@@ -90,4 +82,3 @@ async function getData () {
 export { handleSubmit };
 export { callAPI };
 export { getData };
-export { isValidUrl };

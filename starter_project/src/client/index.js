@@ -1,10 +1,9 @@
 // js files
-import { handleSubmit, callAPI, isValidUrl, getData } from './js/formHandler'
-import { checkForName } from './js/nameChecker'
+import { handleSubmit, callAPI, getData } from './js/formHandler'
+import { isValidUrl } from './js/nameChecker'
 
 export {
     handleSubmit,
-    checkForName,
     callAPI,
     isValidUrl,
     getData
