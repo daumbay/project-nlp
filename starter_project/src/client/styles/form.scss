@@ -10,3 +10,11 @@ input {
     line-height: 16px;
     margin: 10px 0;
 }
+
+button {
+    font-size: 1.2em;
+
+    &:hover {
+        color: red;
+    }
+}
