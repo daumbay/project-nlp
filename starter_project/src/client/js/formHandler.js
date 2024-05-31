@@ -1,12 +1,16 @@
 // Replace checkForName with a function that checks the URL
 import { isValidUrl } from './nameChecker'
 
-// If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
-// const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
-const serverURL = 'https://localhost:8000/api'
+document.addEventListener('DOMContentLoaded', function(){
+    // If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
+    // const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
+    const serverURL = 'https://localhost:8000/api'
 
-const form = document.getElementById('urlForm');
-form.addEventListener('submit', handleSubmit);
+    const form = document.getElementById('urlForm');
+    form.addEventListener('submit', handleSubmit);
+
+})
+
 
 function handleSubmit(event) {
     event.preventDefault();
@@ -81,5 +85,6 @@ async function getData () {
 
 // Export the handleSubmit function
 export { handleSubmit };
+export { updateView };
 export { callAPI };
 export { getData };
